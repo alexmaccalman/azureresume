@@ -6,19 +6,20 @@ import azure.functions as func
 
 
 def main(req: func.HttpRequest, azureresume: func.DocumentList) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-    if not azureresume:
-        logging.warning("azureresume item not found")
-    else:
-        logging.info("Found count item, Description=%s", azureresume[0]['count'])
-        count = azureresume[0]['count']
-
-    return func.HttpResponse(
-        body=azureresume[0].data,
+    # logging.info('Python HTTP trigger function processed a request.')
+    # if not azureresume:
+    #     logging.warning("azureresume item not found")
+    # else:
+    #     logging.info("Found count item, Description=%s", azureresume[0]['count'])
+    count = azureresume[0]['count']
+    print(count)
+    response = func.HttpResponse(
+        body=json.dumps(azureresume[0].data),
         status_code=200,
         headers={'Content-Type':'application/json'}
-    )
-
+    )   
+    
+    return response
 
  
 
