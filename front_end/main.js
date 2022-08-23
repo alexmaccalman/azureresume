@@ -2,11 +2,9 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     getVisitCount(); // when content is loaded go run this event
 })
 
-const functionAPI = ""
 // create a function to get the count
-const getVisitCount = () => {
-    let count = 30;
-    // get the response of the api and return as a json
+function getVisitCount() {
+    const functionAPI = "http://localhost:7071/api/azureresume/1/1"
     fetch(functionAPI).then(Response => {
         return Response.json()
     }).then(Response =>{
@@ -16,7 +14,6 @@ const getVisitCount = () => {
     }).catch(function(error){ // if there is an error lo to the console
         console.log(error);
     });
-    return count
 }
-
+getVisitCount()
 

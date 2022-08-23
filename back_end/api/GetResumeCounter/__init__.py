@@ -1,24 +1,33 @@
 from email.headerregistry import ContentTypeHeader
+from importlib.util import resolve_name
 import json
 import logging
 
 import azure.functions as func
 
 
-def main(req: func.HttpRequest, azureresume: func.DocumentList) -> func.HttpResponse:
+def main(req: func.HttpRequest, readdb: func.DocumentList, updatedb: func.Out[func.Document]) -> func.HttpResponse:
     # logging.info('Python HTTP trigger function processed a request.')
     # if not azureresume:
     #     logging.warning("azureresume item not found")
     # else:
     #     logging.info("Found count item, Description=%s", azureresume[0]['count'])
-    count = azureresume[0]['count']
-    print(count)
+    currentrow = readdb[0].data
+    print(type(readdb[0].data))
+    currentrow['count'] = currentrow['count'] + 1
+    #response['count'] = newcount
+    print("about to print")
+    print(currentrow)
+    # write to the cosmos DB the new count
+
     response = func.HttpResponse(
-        body=json.dumps(azureresume[0].data),
+        body=json.dumps(currentrow),
         status_code=200,
         headers={'Content-Type':'application/json'}
     )   
-    
+
+    updatedb.set(func.Document.from_dict(currentrow))
+
     return response
 
  
