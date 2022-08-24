@@ -2,13 +2,11 @@ name: Deploy Python Backend
 
 on:
   push:
-    branches: [ main ]
     paths:
-    - 'back_end/**'
-
+      - 'back_end/**'
 
 env:
-  AZURE_FUNCTIONAPP_NAME: counterbackend # set this to your application's name
+  AZURE_FUNCTIONAPP_NAME: 'counterbackend' # set this to your application's name
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'back_end'   # set this to the path to your web app project, defaults to the repository root
   PYTHON_VERSION: '3.7'                 # set this to the Python version to use (supports 3.6, 3.7, 3.8)
 
@@ -18,11 +16,14 @@ jobs:
     steps:
     - name: 'Checkout GitHub action'
       uses: actions/checkout@v2
-    - name: 'Login via Azure CLI'
+
+    - name: 'Login to Azure US Gov Cloud with CLI'
       uses: azure/login@v1
       with:
-         creds: ${{ secrets.AZURE_CREDENTIALS }}
-         
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        environment: 'AzureUSGovernment'
+        enable-AzPSSession: false
+
     - name: 'Resolve Project Dependencies Using Pip'
       shell: bash
       run: |
