@@ -19,7 +19,7 @@ def main(req: func.HttpRequest, readdb: func.DocumentList, updatedb: func.Out[fu
     print("about to print")
     print(currentrow)
     # write to the cosmos DB the new count
-
+    # new commet
     response = func.HttpResponse(
         body=json.dumps(currentrow),
         status_code=200,
