@@ -1,11 +1,11 @@
 name: deploy_frontend
 # Deploys when push is made from frontend folder
 
-on:
-    push:
-        branches: [ main ]
-        paths:
-        - 'front_end/**'
+on: push
+
+        #branches: [ main ]
+  paths:
+  - 'front_end/**'
 
 jobs:
   build:
