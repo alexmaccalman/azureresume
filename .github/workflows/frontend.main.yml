@@ -25,14 +25,13 @@ jobs:
       with:
         azcliversion: 2.0.27
         inlineScript: |
-          az storage blob upload-batch --account-name frontendstorage --auth-mode key -d '$web' -s 'front_end/'
+          az storage blob upload-batch --account-name frontendstorage --auth-mode key -d '$web' -s front_end/
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az cdn endpoint purge --content-paths  "/*" --profile-name "cdn-profile-alexmaccalman" --name "cdn-endpoint-alexmaccalman (cdn-profile-alexmaccalman/cdn-endpoint-alexmaccalman)" --resource-group "front_end"
+          az cdn endpoint purge --content-paths  "/*" --profile-name "cdn-profile-alexmaccalman" --name "cdn-endpoint-alexmaccalman" --resource-group "front_end" --no-wait
     
-
   # Azure logout
     - name: logout
       run: |
