@@ -29,7 +29,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az cd endpoint purge --content-paths  "/*" --profile-name "cdn-profile-alexmaccalman" --name "cdn-endpoint-alexmaccalman" --resource-group "front_end" --no-wait
+          az cdn endpoint purge --content-paths  "/*" --profile-name "cdn-profile-alexmaccalman" --name "cdn-endpoint-alexmaccalman" --resource-group "front_end" --no-wait
     
   # Azure logout
     - name: logout
