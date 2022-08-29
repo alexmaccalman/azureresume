@@ -36,9 +36,12 @@ jobs:
       uses: azure/CLI@v1
       env: 
         CONNECTION_SECRET: ${{ steps.myGetSecretAction.outputs.cosmosconnection }}
+
+
+
       with:
         inlineScript: |
-          az storage blob upload-batch --account-name frontendstorage --overwrite --auth-mode key --connection-string ${{ env.CONNECTION_SECRET }} -d '$web' -s front_end/
+          az storage blob upload-batch --account-name frontendstorage --overwrite --auth-mode key --connection-string 'https://atecexkeyvault.vault.usgovcloudapi.net/secrets/cosmosconnection/dcf6a22ce39b48da94d2802441c0f9bc' -d '$web' -s front_end/
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
