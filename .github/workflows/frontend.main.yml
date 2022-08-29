@@ -27,17 +27,11 @@ jobs:
         secrets: 'cosmosconnection'
       id: myGetSecretAction
 
-# ${{ steps.myGetSecretAction.outputs.containerUsername }}
-    # - name: Set envion vars
-    #   env: 
-    #     CONNECTION_SECRET: ${{ steps.myGetSecretAction.outputs.cosmosconnection }}
 
     - name: Upload to blob storage
       uses: azure/CLI@v1
       env: 
         CONNECTION_SECRET: ${{ steps.myGetSecretAction.outputs.cosmosconnection }}
-
-
 
       with:
         inlineScript: |

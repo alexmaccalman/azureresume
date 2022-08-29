@@ -13,13 +13,12 @@ def main(req: func.HttpRequest, readdb: func.DocumentList, updatedb: func.Out[fu
     # else:
     #     logging.info("Found count item, Description=%s", azureresume[0]['count'])
     currentrow = readdb[0].data
-    print(type(readdb[0].data))
+    #print(type(readdb[0].data))
     currentrow['count'] = currentrow['count'] + 1
     #response['count'] = newcount
-    print("about to print")
-    print(currentrow)
+    #print("about to print")
+    #print(currentrow)
     # write to the cosmos DB the new count
-    # new commet new
     response = func.HttpResponse(
         body=json.dumps(currentrow),
         status_code=200,
