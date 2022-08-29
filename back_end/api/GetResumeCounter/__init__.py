@@ -5,7 +5,7 @@ import logging
 
 import azure.functions as func
 
-# test 2
+# test 3
 
 def main(req: func.HttpRequest, readdb: func.DocumentList, updatedb: func.Out[func.Document]) -> func.HttpResponse:
     # logging.info('Python HTTP trigger function processed a request.')
