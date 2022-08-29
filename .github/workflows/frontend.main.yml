@@ -20,11 +20,18 @@ jobs:
         environment: 'AzureUSGovernment'
         enable-AzPSSession: false
 
+    - name: Connect to Azure Key Vault
+      uses: Azure/get-keyvault-secrets@v1
+      with: 
+        keyvault: "atecexkeyvault"
+        secrets: 'cosmosconnection'
+      id: myGetSecretAction
+
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az storage blob upload-batch --account-name frontendstorage --overwrite --auth-mode key --connection-string 'DefaultEndpointsProtocol=https;AccountName=frontendstorage;AccountKey=iflO2/WbN/1oY4ZtsUaDLGcL0eNJ3uvoK7ngTSLazpeOGNQlGlPB/3JC7GPCqnwKMkAYUrypWo8f+AStcZ4d5w==;EndpointSuffix=core.usgovcloudapi.net' -d '$web' -s front_end/
+          az storage blob upload-batch --account-name frontendstorage --overwrite --auth-mode key --connection-string ${{ steps.myGetSecretAction.outputs.cosmosconnection }} -d '$web' -s front_end/
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
