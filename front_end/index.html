@@ -10,8 +10,30 @@
 <a> https://www.linkedin.com/in/alexmaccalman/</a>
 </p>
 <br>
-<p>Number of visits:  <a id="counter"></a> </p>
+<p>Number of visits test 7 :  <a id="counter"></a> </p>
 
-<script src="main.js"></script>
+<!--  
+<script>src="main.js"</script>
+-->
+
+<script>
+    function getVisitCount() {
+        const functionAPI = "http://localhost:7071/api/azureresume/1/1"
+        const cloudfunctionAPI = "https://counterbackend.azurewebsites.us/api/counter/1/1"
+        fetch(cloudfunctionAPI).then(Response => {
+            return Response.json()
+        }).then(Response =>{
+            console.log("Website called function API"); // log for debugging
+            count = Response.count; // set count variable with the json response 
+            document.getElementById("counter").innerHTML = count //set element in the html document to the count
+        }).catch(function(error){ // if there is an error lo to the console
+            console.log(error);
+        });
+    }
+    window.addEventListener('DOMContentLoaded', (event) =>{
+        getVisitCount(); // when content is loaded go run this event
+    })
+</script>
+
 </body>
 </html>
