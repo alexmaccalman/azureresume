@@ -4,7 +4,7 @@ name: deploy_frontend
 on:
   push:
     paths:
-      - 'front_end/**'
+      - 'government/front_end/**'
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
 
       with:
         inlineScript: |
-          az storage blob upload-batch --account-name frontendstorage --overwrite --auth-mode key --connection-string $CONNECTION_SECRET -d '$web' -s front_end/
+          az storage blob upload-batch --account-name frontendstorage --overwrite --auth-mode key --connection-string $CONNECTION_SECRET -d '$web' -s government/front_end/
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
